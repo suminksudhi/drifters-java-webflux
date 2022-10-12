@@ -10,10 +10,7 @@ import reactor.core.publisher.Mono;
 
 public interface ReviewRepository extends ReactiveMongoRepository<Review, ObjectId> {
 
-   // @Query(value = "{ $or: [ { 'title' : {$regex:?0,$options:'i'} }, { 'description' : {$regex:?0,$options:'i'} } ] }")
-   // Page<Review> query(String query, Pageable page);
-
-    Flux<Review[]> findReviewByProductId(String productId);
+    Flux<Review> findReviewByProductId(String productId);
 
     @Aggregation({
             "{$match:{ productId:{$eq: ?0 }}}",

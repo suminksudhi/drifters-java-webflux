@@ -1,10 +1,12 @@
 package com.drifter.reviewservice.reactive.controller;
 
+import com.drifter.reviewservice.domain.Review;
 import com.drifter.reviewservice.reactive.service.ReviewService;
 import com.drifter.reviewservice.domain.ReviewScore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -17,7 +19,7 @@ public class ReviewController {
 
     @RequestMapping(value = "/{productId}/list", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object getProductReviews(@PathVariable String productId) {
+    public Flux<Review> getProductReviews(@PathVariable String productId) {
         return reviewService.getProductReviews(productId);
     }
 

@@ -10,10 +10,9 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ReviewService {
-
     @Autowired
     ReviewRepository reviewRepository;
-    public Flux<Review[]> getProductReviews(String productId) {
+    public Flux<Review> getProductReviews(String productId) {
         return reviewRepository.findReviewByProductId(productId);
     }
 
