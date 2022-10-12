@@ -7,6 +7,7 @@ services:
     image: mongo:latest
     volumes:
       - ./data:/data/db
+      - ./seed:/seed
     networks:
       - company-network
   review-service:
@@ -16,7 +17,7 @@ services:
       dockerfile: Dockerfile
     image: review-service:latest
     ports:
-      - 18888:8888
+      - 9001:9001
     networks:
       - company-network
   product-service:
@@ -26,7 +27,7 @@ services:
       dockerfile: Dockerfile
     image: product-service:latest
     ports:
-      - 19999:9999
+      - 9002:9002
     networks:
       - company-network
 networks:
