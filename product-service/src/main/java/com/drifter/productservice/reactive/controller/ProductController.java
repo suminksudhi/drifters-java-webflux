@@ -1,5 +1,6 @@
 package com.drifter.productservice.reactive.controller;
 
+import com.drifter.productservice.domain.Product;
 import com.drifter.productservice.reactive.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/{productId}")
-    public Object getProducts(@PathVariable String productId) {
-        return productService.getProduct(productId);
+    public Mono<Product> getProducts(@PathVariable String productId) {
+        return productService.fetchProductWithReviewScore(productId);
     }
 }
