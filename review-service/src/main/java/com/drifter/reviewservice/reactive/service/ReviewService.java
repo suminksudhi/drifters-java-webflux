@@ -1,11 +1,12 @@
 package com.drifter.reviewservice.reactive.service;
 
 import com.drifter.reviewservice.reactive.repository.ReviewRepository;
-import domain.Review;
-import domain.ReviewScore;
+import com.drifter.reviewservice.domain.Review;
+import com.drifter.reviewservice.domain.ReviewScore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class ReviewService {
@@ -16,7 +17,7 @@ public class ReviewService {
         return reviewRepository.findReviewByProductId(productId);
     }
 
-    public Flux<ReviewScore> getProductReviewScore(String productId) {
+    public Mono<ReviewScore> getProductReviewScore(String productId) {
         return reviewRepository.findReviewScoreByProductId(productId);
     }
 }

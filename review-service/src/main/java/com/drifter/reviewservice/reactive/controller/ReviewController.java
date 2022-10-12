@@ -1,11 +1,11 @@
 package com.drifter.reviewservice.reactive.controller;
 
 import com.drifter.reviewservice.reactive.service.ReviewService;
-import domain.ReviewScore;
+import com.drifter.reviewservice.domain.ReviewScore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -23,7 +23,7 @@ public class ReviewController {
 
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Flux<ReviewScore> getProductReviewScore(@PathVariable String productId) {
+    public Mono<ReviewScore> getProductReviewScore(@PathVariable String productId) {
         return reviewService.getProductReviewScore(productId);
     }
 

@@ -1,4 +1,4 @@
-package domain;
+package com.drifter.reviewservice.domain;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
