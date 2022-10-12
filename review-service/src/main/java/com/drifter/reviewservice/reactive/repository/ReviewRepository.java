@@ -2,13 +2,12 @@ package com.drifter.reviewservice.reactive.repository;
 
 import com.drifter.reviewservice.domain.Review;
 import com.drifter.reviewservice.domain.ReviewScore;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface ReviewRepository extends ReactiveMongoRepository<Review, ObjectId> {
+public interface ReviewRepository extends ReactiveMongoRepository<Review, String> {
 
     Flux<Review> findReviewByProductId(String productId);
 

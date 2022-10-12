@@ -19,4 +19,16 @@ public class ReviewService {
     public Mono<ReviewScore> getProductReviewScore(String productId) {
         return reviewRepository.findReviewScoreByProductId(productId);
     }
+
+    public Mono<Review> save(Review review) {
+        return reviewRepository.save(review);
+    }
+
+    public Mono<Review> update(String id, Review review) {
+        return reviewRepository.save(review);
+    }
+
+    public Mono<Void> delete(String id) {
+        return reviewRepository.deleteById(id);
+    }
 }
