@@ -7,7 +7,6 @@
         <groupId>com.drifter</groupId>
         <version>1.0.0</version>
     </parent>
-    <groupId>com.drifter</groupId>
     <artifactId>review-service</artifactId>
     <version>1.0.0</version>
     <name>review-service</name>
@@ -47,8 +46,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
 
