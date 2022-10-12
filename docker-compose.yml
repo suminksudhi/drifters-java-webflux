@@ -1,0 +1,34 @@
+version: '2'
+services:
+  db:
+    container_name: db
+    ports:
+      - 27017:27017
+    image: mongo:latest
+    volumes:
+      - ./data:/data/db
+    networks:
+      - company-network
+  review-service:
+    container_name: review-service
+    build:
+      context: review-service
+      dockerfile: Dockerfile
+    image: review-service:latest
+    ports:
+      - 18888:8888
+    networks:
+      - company-network
+  product-service:
+    container_name: product-service
+    build:
+      context: product-service
+      dockerfile: Dockerfile
+    image: product-service:latest
+    ports:
+      - 19999:9999
+    networks:
+      - company-network
+networks:
+  company-network:
+    driver: bridge
