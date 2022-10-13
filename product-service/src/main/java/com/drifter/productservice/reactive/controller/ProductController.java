@@ -18,7 +18,7 @@ public class ProductController {
 
     @GetMapping("/{productId}")
     public Mono<Product> getProducts(@PathVariable String productId) {
-        log.info("Fetching product with score for productId:" + productId);
+        log.info("Fetching product with score for productId: {}", productId);
         return productService.fetchProductWithReviewScore(productId);
     }
 }

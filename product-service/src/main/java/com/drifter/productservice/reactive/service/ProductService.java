@@ -29,9 +29,9 @@ public class ProductService {
                 .uri("/products/" + productId)
                 .retrieve()
                 .onStatus(HttpStatus::is4xxClientError,
-                        error -> Mono.error(new RuntimeException("Product not found")))
+                        error -> Mono.error(new RuntimeException("Product not found with id:" + productId)))
                 .onStatus(HttpStatus::is5xxServerError,
-                        error -> Mono.error(new RuntimeException("Server is not responding"+ error.toString())))
+                        error -> Mono.error(new RuntimeException("Server is not responding" + error.toString())))
                 .bodyToMono(Product.class);
     }
 
@@ -45,8 +45,8 @@ public class ProductService {
         return tuple2.map( result -> {
             Product product1 = result.getT1();
             ReviewScore reviewScore = result.getT2();
-            log.info("Fetched  product");
-            log.info("Fetched  productReviewScore");
+            log.info("Fetched  product: {}", product1.getId());
+            log.info("Fetched  productReviewScore: {}", reviewScore.getProductId());
             // add the obtained productReview to product
             product1.setAverageReviewScore(reviewScore.getAverageReviewScore());
             product1.setNumberOfReviews(reviewScore.getNumberOfReviews());
