@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/review")
@@ -30,13 +32,14 @@ public class ReviewController {
     }
 
     @PutMapping("{id}")
-    public Mono<Review> updateById(@PathVariable("id") final String id, @RequestBody final Review review) {
+    public Mono<Review> updateById(@PathVariable("id") final String id, @Valid @RequestBody final Review review) {
         return reviewService.update(id, review);
     }
     @PostMapping
-    public Mono<Review> save(@RequestBody final Review review) {
+    public Mono<Review> save(@Valid @RequestBody Review review) {
         return reviewService.save(review);
     }
+
     @DeleteMapping("{id}")
     public Mono<Void> deleteById(@PathVariable final String id) {
         return reviewService.delete(id);

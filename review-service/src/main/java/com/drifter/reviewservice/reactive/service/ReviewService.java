@@ -3,12 +3,17 @@ package com.drifter.reviewservice.reactive.service;
 import com.drifter.reviewservice.reactive.repository.ReviewRepository;
 import com.drifter.reviewservice.domain.Review;
 import com.drifter.reviewservice.domain.ReviewScore;
+import com.mongodb.DuplicateKeyException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.concurrent.CompletableFuture;
+
 @Service
+@Slf4j
 public class ReviewService {
     @Autowired
     ReviewRepository reviewRepository;
@@ -16,16 +21,28 @@ public class ReviewService {
         return reviewRepository.findReviewByProductId(productId);
     }
 
+    Mono<ReviewScore> emptyProductReviewScore(String productId) {
+        return Mono.fromFuture(CompletableFuture.supplyAsync(() -> {
+            var review = new ReviewScore();
+            review.setProductId(productId);
+            return review;
+        }));
+    }
+
     public Mono<ReviewScore> getProductReviewScore(String productId) {
-        return reviewRepository.findReviewScoreByProductId(productId);
+        return reviewRepository
+                .findReviewScoreByProductId(productId)
+                .switchIfEmpty(emptyProductReviewScore(productId));
+                //.switchIfEmpty(Mono.error(new ProductNotFoundException(productId)));
     }
 
     public Mono<Review> save(Review review) {
-        return reviewRepository.save(review);
+        return reviewRepository.save(review)
+                .onErrorContinue(DuplicateKeyException.class, (e, o) -> log.info(e.getMessage()));
     }
 
     public Mono<Review> update(String id, Review review) {
-        return reviewRepository.save(review);
+        return this.save(review);
     }
 
     public Mono<Void> delete(String id) {
