@@ -1,6 +1,7 @@
 package com.drifter.productservice.reactive.controller;
 
 import com.drifter.productservice.domain.Product;
+import com.drifter.productservice.domain.ReviewScore;
 import lombok.RequiredArgsConstructor;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.DisplayName;
@@ -21,6 +22,9 @@ class ProductControllerTest {
   @DisplayName("Should get product with average review score")
   void shouldGetProductsWithReviews() {
     var productId = "EG4959";
+    ReviewScore reviewScore = new ReviewScore();
+    reviewScore.setProductId(productId);
+
     webClient.get().uri("/product/{productId}", productId)
             .exchange()
             .expectStatus().isOk()

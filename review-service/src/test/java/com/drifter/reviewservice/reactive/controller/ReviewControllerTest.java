@@ -23,8 +23,6 @@ import java.util.Map;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-// @ExtendWith(SpringExtension.class)
-// @WebFluxTest(ReviewController.class)
 class ReviewControllerTest {
 
   @Autowired

@@ -13,6 +13,11 @@ docker compose --env-file ./config/.env.dev build
 ```shell
 docker compose --env-file ./config/.env.dev up 
 ```
+### Api test
+After services are running
+```shell
+mvn test
+```
 #### Bring down system
 ```shell
 docker compose --env-file ./config/.env.dev down
