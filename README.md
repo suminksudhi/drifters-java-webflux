@@ -50,3 +50,8 @@ https://www.adidas.co.uk/api/models/IUU93/reviews?bazaarVoiceLocale=en_GB&includ
 ```shell
 docker compose run db mongoimport --drop --collection=reviews "mongodb://db/drifter-db" /seed/reviews.json --jsonArray
 ```
+
+### Api aggregation
+aggregate api results and show in one response nodes averageReviewScore/numberOfReviews
+
+![alt text](https://raw.githubusercontent.com/suminksudhi/drifters-java-webflux/main/images/product-service.png)
