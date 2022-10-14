@@ -18,6 +18,8 @@ services:
     image: review-service:${REVIEW_VERSION}
     ports:
       - 9001:80
+    environment:
+      - SPRING_DATA_MONGODB_URI=${MONGODB_URI}
     networks:
       - company-network
   product-service:
@@ -28,6 +30,8 @@ services:
     image: product-service:${PRODUCT_VERSION}
     ports:
       - 9002:80
+    environment:
+      - DRIFTER_REVIEW_URL=${REVIEW_SERVICE}
     networks:
       - company-network
 networks:
