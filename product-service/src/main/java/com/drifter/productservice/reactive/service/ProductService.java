@@ -37,7 +37,7 @@ public class ProductService {
 
     // aggregation of productReview
     public Mono<Product> fetchProductWithReviewScore(String productId) {
-        Mono<Product> product = getProduct(productId).log();
+        Mono<Product> product = getProduct(productId);
         Mono<ReviewScore> productReviewScore = productReviewService.getProductReviewScore(productId);
          //ProductWithReviewScore::new
         Mono<Tuple2<Product, ReviewScore>> tuple2  = Mono.zip(product, productReviewScore);

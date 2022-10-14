@@ -1,32 +1,32 @@
-### Build Project
+# Spring Web flux
+Sample project in spring web flux, mongo reactive
+
+### Build Project 
 ```shell
-mvn clean package
+mvn clean -DskipTests package
 ```
 #### Build Image
 ```shell
-mvn spring-boot:build-image
+docker compose --env-file ./config/.env.dev build 
 ```
-
-### Bring up server
+#### Bring up server
 ```shell
-docker compose up
+docker compose --env-file ./config/.env.dev up 
 ```
-
-### Bring down system
+#### Bring down system
 ```shell
-docker compose down
+docker compose --env-file ./config/.env.dev down
 ```
-
-### Scale system
+#### Scale system
 ```shell
-docker compose --file docker-compose-scale.yml up -d --build --scale message-server=3 product-server=2
+docker compose --env-file ./config/.env.dev  --file docker-compose-scale.yml up -d --build --scale review-service=3 --scale=product-service=2
 ```
-
-### Remove all docker
+#### Remove all docker
 ```shell
 docker rm -f $(docker ps -aq)
 ```
 
+## Project specifics
 ### Sample adidas products for live api
 #### Sample used for review seed
 ['EG4959', 'EE6999', 'GY6701', 'EG4958', 'FX5499']

@@ -1,30 +1,34 @@
 version: '2'
 services:
   db:
-    container_name: db
     ports:
       - 27017:27017
     image: mongo:latest
     volumes:
       - ./data:/data/db
+      - ./seed:/seed
     networks:
       - company-network
   review-service:
     build:
       context: review-service
       dockerfile: Dockerfile
-    image: review-service:latest
+    image: review-service:${REVIEW_VERSION}
     ports:
-      - "18800-18888:8888"
+      - "9001-9010:80"
+    depends_on:
+      - db
     networks:
       - company-network
   product-service:
     build:
       context: product-service
       dockerfile: Dockerfile
-    image: product-service:latest
+    image: product-service:${PRODUCT_VERSION}
     ports:
-      - "19900-19999:9999"
+      - "9011-9020:80"
+    depends_on:
+      - db
     networks:
       - company-network
 networks:

@@ -15,9 +15,9 @@ services:
     build:
       context: review-service
       dockerfile: Dockerfile
-    image: review-service:latest
+    image: review-service:${REVIEW_VERSION}
     ports:
-      - 9001:9001
+      - 9001:80
     networks:
       - company-network
   product-service:
@@ -25,9 +25,9 @@ services:
     build:
       context: product-service
       dockerfile: Dockerfile
-    image: product-service:latest
+    image: product-service:${PRODUCT_VERSION}
     ports:
-      - 9002:9002
+      - 9002:80
     networks:
       - company-network
 networks:
