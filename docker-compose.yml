@@ -9,7 +9,7 @@ services:
       - ./data:/data/db
       - ./seed:/seed
     networks:
-      - company-network
+      - drifter-network
   review-service:
     container_name: review-service
     build:
@@ -21,7 +21,7 @@ services:
     environment:
       - SPRING_DATA_MONGODB_URI=${MONGODB_URI}
     networks:
-      - company-network
+      - drifter-network
   product-service:
     container_name: product-service
     build:
@@ -33,7 +33,7 @@ services:
     environment:
       - DRIFTER_REVIEW_URL=${REVIEW_SERVICE}
     networks:
-      - company-network
+      - drifter-network
 networks:
-  company-network:
+  drifter-network:
     driver: bridge
