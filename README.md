@@ -51,7 +51,19 @@ https://www.adidas.co.uk/api/models/IUU93/reviews?bazaarVoiceLocale=en_GB&includ
 docker compose run db mongoimport --drop --collection=reviews "mongodb://db/drifter-db" /seed/reviews.json --jsonArray
 ```
 
+### Tasks
+
 ### Api aggregation
 aggregate api results and show in one response nodes averageReviewScore/numberOfReviews
 
 ![alt text](https://raw.githubusercontent.com/suminksudhi/drifters-java-webflux/main/images/product-service.png)
+
+### Microservices
+2 microservices product-service and review-service running in docker
+
+![alt text](https://raw.githubusercontent.com/suminksudhi/drifters-java-webflux/main/images/docker-stat.png)
+
+### Api test stat
+Build and test status
+
+![alt text](https://raw.githubusercontent.com/suminksudhi/drifters-java-webflux/main/images/build-stat.png)
