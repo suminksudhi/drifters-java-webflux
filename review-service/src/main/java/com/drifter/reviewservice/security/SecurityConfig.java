@@ -24,6 +24,15 @@ public class SecurityConfig {
 				.password("password")
 				.roles("USER")
 				.build();
+
+		/**
+		UserDetails admin = User.withDefaultPasswordEncoder()
+				// assuming a system user with user:password as creds
+				.username("admin")
+				.password("admin")
+				.roles("ADMIN")
+				.build();
+		 **/
 		return new MapReactiveUserDetailsService(user);
 	}
 
@@ -45,8 +54,8 @@ public class SecurityConfig {
 				.hasRole("USER")
 				.pathMatchers("/review/**").permitAll()
 				.and()
-				.httpBasic(Customizer.withDefaults())
-				.formLogin(Customizer.withDefaults());
+				.httpBasic(Customizer.withDefaults());
+				// .formLogin(Customizer.withDefaults());
 		return http.build();
 	}
 }
